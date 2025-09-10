@@ -107,6 +107,33 @@
       40%, 60% { opacity: 1; }
       80%, 100% { opacity: 0; }
     }
+
+    /* Estilo del botón de copia */
+    .copy-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 24px;
+      background-color: #00a67e;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #008f6a;
+    }
+
+    .copy-message {
+      margin-top: 8px;
+      color: #00a67e;
+      font-size: 14px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -142,7 +169,12 @@
     
     <h1>Kaspersky Small Office Security</h1>
 
+    <!-- 🔽 Botón de Descarga -->
     <a href="assets/archivo.zip" download class="download-button">Descargar</a>
+
+    <!-- 🔑 Botón de Código de Activación -->
+    <button class="copy-button" onclick="copiarCodigo()">Código de Activación</button>
+    <div class="copy-message" id="copy-msg">¡Código copiado al portapapeles! ✅</div>
 
     <section class="cards">
       <div class="card">
@@ -159,7 +191,7 @@
     </section>
   </main>
 
-  <!-- ✅ Script de Autenticación -->
+  <!-- ✅ Script de Autenticación y Copiado -->
   <script>
     function verificarCredenciales() {
       const user = document.getElementById("usuario").value;
@@ -181,7 +213,17 @@
         }
       }, 1500);
     }
+
+    function copiarCodigo() {
+      const codigo = "C1S9WPUC2HJCRH15QKFN";
+      navigator.clipboard.writeText(codigo).then(() => {
+        const msg = document.getElementById("copy-msg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 2000);
+      });
+    }
   </script>
 
 </body>
 </html>
+
