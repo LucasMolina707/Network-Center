@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NETWORK CENTER S.A.S - Seguridad</title>
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Protección por usuario y contraseña -->
+  <script>
+    (function autenticar() {
+      const usuario = prompt("Ingrese el usuario:");
+      const contraseña = prompt("Ingrese la contraseña:");
+
+      if (usuario !== "NetworkCenter" || contraseña !== "DELIVERY") {
+        alert("Acceso denegado 🚫");
+        location.reload(); // vuelve a pedir los datos
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -40,3 +53,4 @@
 
 </body>
 </html>
+
