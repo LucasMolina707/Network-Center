@@ -33,22 +33,55 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 @media (min-width: 768px) { .content-split { grid-template-columns: 1fr 1fr; } }
 
 
-/* ===== COMPONENTES REUTILIZABLES ===== */
-
-/* --- Header y Footer --- */
+/* ===== ENCABEZADO (HEADER) - ENFOQUE MOBILE-FIRST ===== */
 .main-header { background-color: var(--dark-color); height: var(--header-height); position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 .main-header .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
 .main-header a { color: var(--white-color); }
-.main-nav ul { display: flex; align-items: center; }
-.main-nav li { margin-left: 30px; }
-.nav-toggle { display: none; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; }
-.main-footer { background-color: #061a38; color: #ccc; padding: 2rem 0; text-align: center; }
 
-/* --- Logo del Header --- */
-.main-header .logo { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; font-weight: normal; color: var(--white-color); }
-.main-header .logo-img { max-height: 45px; width: auto; object-fit: contain; display: block; }
+/* Logo */
+.main-header .logo { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: normal; }
+.logo-svg { height: 40px; width: auto; fill: #00aaff; /* Color del SVG */ }
+.main-header .logo span { color: var(--white-color); }
 
-/* --- Botones --- */
+
+/* Navegación (Estilos base para móvil) */
+.main-nav { 
+    display: none; /* Oculto por defecto en móvil */
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--dark-color);
+}
+.main-nav.is-visible { display: block; /* Se muestra con JS */ }
+.main-nav ul { flex-direction: column; align-items: center; padding-top: 3rem; }
+.main-nav li { margin: 1.5rem 0; }
+.nav-toggle { display: block; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; }
+
+/* --- Estilos para pantallas grandes (Desktop) --- */
+@media (min-width: 992px) {
+    .nav-toggle { display: none; } /* Ocultamos el botón hamburguesa */
+    
+    .main-nav {
+        display: block; /* Mostramos la navegación */
+        position: static; /* La devolvemos a su flujo normal */
+        width: auto;
+        height: auto;
+        background-color: transparent;
+    }
+    .main-nav ul {
+        flex-direction: row; /* La ponemos horizontal */
+        padding-top: 0;
+    }
+    .main-nav li { margin: 0 0 0 30px; }
+    .main-header .logo { font-size: 1.1rem; gap: 15px; }
+    .logo-svg { height: 45px; }
+}
+
+
+/* ===== OTROS COMPONENTES ===== */
+/* Botones */
 .btn { display: inline-block; padding: 10px 20px; border-radius: var(--border-radius); font-weight: bold; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; }
 .btn-primary { background-color: var(--primary-color); color: var(--white-color); }
 .btn-primary:hover { background-color: #0b5ed7; }
@@ -58,7 +91,7 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .btn-download:hover { background-color: #157347; }
 .btn-download i { margin-right: 8px; }
 
-/* --- Tarjetas (Cards) --- */
+/* Tarjetas (Cards) */
 .card { background-color: var(--white-color); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--box-shadow); overflow: hidden; display: flex; flex-direction: column; }
 .card-img { width: 100%; height: 180px; object-fit: cover; }
 .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
@@ -67,47 +100,10 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .card-body .version { font-size: 0.85rem; font-weight: bold; color: #888; margin-top: -10px; margin-bottom: 10px; }
 .card-footer { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--border-color); margin-top: 1rem; paddingTop: 1rem; }
 
-/* --- Alertas para anuncios --- */
+/* Alertas */
 .alert { padding: 1rem; border-radius: var(--border-radius); border: 1px solid transparent; margin-bottom: 1rem; }
 .alert-info { background-color: #e2f3ff; border-color: #b6e0fe; color: #0a58ca; }
 .alert-warning { background-color: #fff8e1; border-color: #ffecb3; color: #665100; }
 
-/* ===== RESPONSIVIDAD (CORREGIDA) ===== */
-/* --- CORRECCIÓN: El menú móvil se activa ahora en pantallas más pequeñas que 992px --- */
-@media (max-width: 992px) {
-    /* Ajuste de tamaño de títulos en móvil */
-    h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.5rem; }
-
-    /* Ajuste del logo en móvil */
-    .main-header .logo { font-size: 1rem; gap: 10px; }
-    .main-header .logo-img { max-height: 40px; }
-    
-    /* Ocultamos el menú horizontal y mostramos el botón */
-    .main-nav { display: none; }
-    .nav-toggle { display: block; }
-    
-    /* Estilos para el menú desplegable cuando está visible */
-    .main-nav.is-visible {
-        display: block; /* Hacemos que el <nav> sea visible */
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
-        width: 100%;
-        height: calc(100vh - var(--header-height));
-        background: var(--dark-color);
-        transform: translateX(0);
-        transition: transform 0.3s ease-in-out;
-    }
-    
-    .main-nav.is-visible ul {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 3rem;
-        height: auto;
-    }
-    
-    .main-nav.is-visible li {
-        margin: 1.5rem 0;
-    }
-}
+/* Footer */
+.main-footer { background-color: #061a38; color: #ccc; padding: 2rem 0; text-align: center; }
