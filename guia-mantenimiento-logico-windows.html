@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía de Mantenimiento de Windows - Portal Interno</title>
+    <title>Guía Definitiva de Mantenimiento de Windows - Portal Interno</title>
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -15,14 +15,14 @@
             align-items: center;
             margin-bottom: 0.5rem;
             background-color: #f0f4f8;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: var(--border-radius);
             border-left: 5px solid var(--primary-color);
         }
         .task-checkbox {
             width: 1.3em;
             height: 1.3em;
-            margin-right: 10px;
+            margin-right: 12px;
             cursor: pointer;
         }
         .task-checkbox:checked + label {
@@ -71,8 +71,14 @@
             background-color: #fff8e1;
             border-left: 5px solid var(--warning-color);
             padding: 1rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             border-radius: var(--border-radius);
+        }
+        .part-divider {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--dark-color), rgba(0, 0, 0, 0));
+            margin: 3rem 0;
         }
     </style>
 </head>
@@ -91,94 +97,153 @@
     <main>
         <div class="page-header">
             <div class="container">
-                <h1>Guía Completa de Mantenimiento Lógico para Windows</h1>
-                <p>Prevención y Corrección para un rendimiento óptimo del sistema.</p>
+                <h1>Guía Definitiva de Mantenimiento Lógico y Diagnóstico para Windows</h1>
+                <p>Combina herramientas visuales y comandos potentes para un control total del sistema.</p>
             </div>
         </div>
 
         <div class="content-area">
             <div class="container">
-                <p>Para asegurar un rendimiento óptimo y estable de su sistema operativo Windows, es fundamental realizar un mantenimiento lógico de manera periódica. Este proceso no solo corrige problemas existentes, como la lentitud o errores inesperados, sino que también previene futuras fallas. A continuación, se detalla una guía completa con los pasos a seguir.</p>
+                
+                <h2>Parte 1: Mantenimiento Preventivo (La Rutina Mensual)</h2>
+                <p>Estas tareas mantienen el sistema en óptimas condiciones, evitan la acumulación de basura digital y previenen problemas a futuro.</p>
 
-                <hr style="margin: 2rem 0;">
-
-                <h2>Mantenimiento Preventivo: La Clave para un Sistema Saludable</h2>
-                <p>Estas tareas deben realizarse de forma regular (por ejemplo, una vez al mes) para mantener el sistema en óptimas condiciones.</p>
-
-                <h3>1. Limpieza de Archivos Innecesarios</h3>
+                <h3>Paso 1: Limpieza Profunda de Archivos Innecesarios 🧹</h3>
                 <div class="checklist-item">
                     <input type="checkbox" id="step1" class="task-checkbox">
-                    <label for="step1">Limpiar archivos temporales y del sistema.</label>
+                    <label for="step1">Realizar limpieza profunda de archivos.</label>
                 </div>
-                <p>Windows acumula archivos temporales y cachés. Usa una de estas dos herramientas para eliminarlos.</p>
                 <ul>
-                    <li><strong>Sensor de Almacenamiento (Windows 10 y 11):</strong> Es la herramienta más moderna y automatizada. Ve a <strong>Configuración > Sistema > Almacenamiento</strong> y actívalo.</li>
-                    <li><strong>Liberador de espacio en disco:</strong> La herramienta clásica. Búscala en el menú de inicio y no olvides usar la opción "Limpiar archivos del sistema" para una limpieza profunda.</li>
+                    <li><strong>Usa el Sensor de Almacenamiento (Recomendado):</strong> Ve a <strong>Configuración > Sistema > Almacenamiento</strong>. Actívalo para limpieza automática o haz clic en "Archivos temporales" para una limpieza inmediata.</li>
+                    <li><strong>Usa el Liberador de Espacio en Disco (Potente):</strong> Búscalo en Windows, selecciona C:, y haz clic en "Limpiar archivos del sistema". Marca todas las casillas, especialmente "Limpieza de actualizaciones de Windows".</li>
+                    <li><strong>Limpieza Manual (Opcional):</strong> Presiona <strong>Windows + R</strong> y ejecuta <strong>%temp%</strong>, <strong>temp</strong> y <strong>prefetch</strong> para borrar su contenido (omite los archivos en uso).</li>
                 </ul>
 
-                <h3>2. Desinstalar Programas No Utilizados</h3>
+                <h3>Paso 2: Optimización del Sistema y Aplicaciones ⚙️</h3>
                 <div class="checklist-item">
                     <input type="checkbox" id="step2" class="task-checkbox">
-                    <label for="step2">Revisar y desinstalar programas innecesarios.</label>
+                    <label for="step2">Optimizar aplicaciones y unidades.</label>
                 </div>
-                <p>Libera espacio y reduce posibles conflictos. Ve a <strong>Configuración > Aplicaciones > Aplicaciones y características</strong> y elimina lo que ya no uses.</p>
+                <ul>
+                    <li><strong>Desinstalar Programas No Utilizados:</strong> Ve a <strong>Configuración > Aplicaciones</strong> y elimina lo que no necesites.</li>
+                    <li><strong>Gestionar Aplicaciones de Inicio:</strong> Abre el <strong>Administrador de tareas</strong> (Ctrl + Shift + Esc), ve a "Aplicaciones de inicio" y deshabilita los no esenciales.</li>
+                    <li><strong>Optimizar Unidades:</strong> Busca "Desfragmentar y optimizar unidades" y ejecuta la optimización para tu unidad C:.</li>
+                </ul>
 
-                <h3>3. Optimización de Unidades (Desfragmentación)</h3>
+                <h3>Paso 3: Actualización del Sistema y Controladores 🔄</h3>
                 <div class="checklist-item">
                     <input type="checkbox" id="step3" class="task-checkbox">
-                    <label for="step3">Optimizar (desfragmentar) las unidades de disco.</label>
+                    <label for="step3">Verificar actualizaciones de Windows y Drivers.</label>
                 </div>
-                <p>Este proceso reorganiza los datos en discos duros (HDD). En SSD, Windows realiza un proceso diferente llamado TRIM. Busca "Desfragmentar y optimizar unidades" en el menú de inicio.</p>
-                <div class="note"><strong>Nota:</strong> Nunca desfragmentes un SSD, ya que no ofrece beneficios y puede reducir su vida útil. El sistema lo optimiza automáticamente.</div>
-
-                <h3>4. Gestión de Aplicaciones de Inicio</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step4" class="task-checkbox">
-                    <label for="step4">Administrar aplicaciones de inicio.</label>
-                </div>
-                <p>Abre el <strong>Administrador de Tareas</strong> (clic derecho en la barra de tareas), ve a la pestaña "Aplicaciones de inicio" y deshabilita los programas que no sean esenciales.</p>
-                
-                <h3>5. Mantener el Sistema y los Controladores Actualizados</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step5" class="task-checkbox">
-                    <label for="step5">Buscar actualizaciones de Windows y controladores.</label>
-                </div>
-                <p>Las actualizaciones son cruciales para la seguridad. Busca en <strong>Configuración > Windows Update</strong> y en el <strong>Administrador de dispositivos</strong> para los drivers.</p>
-
-                <hr style="margin: 2rem 0;">
-
-                <h2>Mantenimiento Correctivo: Solución de Problemas Existentes</h2>
-                <p>Si el equipo ya presenta problemas, estas herramientas ayudan a diagnosticar y reparar el sistema.</p>
-
-                <h3>1. Comprobación de Errores en el Disco (CHKDSK)</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step6" class="task-checkbox">
-                    <label for="step6">Realizar comprobación de errores en el disco.</label>
-                </div>
-                <p>Verifica y repara errores lógicos del disco. Ve a <strong>Explorador de archivos</strong>, clic derecho en la unidad C: > <strong>Propiedades > Herramientas > Comprobar</strong>.</p>
-
-                <h3>2. Comprobador de Archivos de Sistema (SFC)</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step7" class="task-checkbox">
-                    <label for="step7">Ejecutar el Comprobador de Archivos de Sistema (SFC).</label>
-                </div>
-                <p>Escanea y repara archivos corruptos de Windows. Abre el <strong>Símbolo del sistema (CMD) como Administrador</strong> y ejecuta el siguiente comando:</p>
+                <ul>
+                    <li><strong>Windows Update:</strong> Ve a <strong>Configuración > Windows Update</strong> y busca actualizaciones.</li>
+                    <li><strong>Controladores (Drivers):</strong> Usa el "Administrador de dispositivos" para actualizar o ejecuta el siguiente comando en CMD para ver una lista de los drivers instalados.</li>
+                </ul>
                 <div class="code-block">
-                    <pre><code>sfc /scannow</code></pre>
+                    <pre><code>driverquery</code></pre>
                     <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
                 </div>
+
+                <hr class="part-divider">
+
+                <h2>Parte 2: Mantenimiento Correctivo y Diagnóstico Avanzado</h2>
+                <p>Ejecuta estos pasos si experimentas problemas. Debes usar el "Símbolo del sistema" o "Terminal" como Administrador.</p>
                 
-                <h3>3. Reparación de la Imagen del Sistema (DISM)</h3>
+                <h3>Paso 1: Verificación y Reparación del Sistema de Archivos 🛠️</h3>
                 <div class="checklist-item">
-                    <input type="checkbox" id="step8" class="task-checkbox">
-                    <label for="step8">Ejecutar la herramienta DISM para reparar la imagen.</label>
+                    <input type="checkbox" id="step4" class="task-checkbox">
+                    <label for="step4">Ejecutar reparación integral del sistema (DISM, SFC, CHKDSK).</label>
                 </div>
-                <p>Si SFC falla, DISM puede reparar el almacén de componentes de Windows. En el mismo <strong>Símbolo del sistema como Administrador</strong>, ejecuta:</p>
+                <p>Ejecuta estos tres comandos en orden para una reparación completa.</p>
+                <p><strong>1. DISM (Reparación de la Imagen del Sistema):</strong></p>
                 <div class="code-block">
                     <pre><code>DISM /Online /Cleanup-Image /RestoreHealth</code></pre>
                     <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
                 </div>
-                <p>Después de ejecutar DISM, es recomendable volver a ejecutar `sfc /scannow` para una verificación final.</p>
+                <p><strong>2. SFC (Comprobador de Archivos de Sistema):</strong></p>
+                <div class="code-block">
+                    <pre><code>sfc /scannow</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+                <p><strong>3. CHKDSK (Comprobación de Errores del Disco):</strong> Requiere un reinicio.</p>
+                <div class="code-block">
+                    <pre><code>chkdsk C: /f /r</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+
+                <h3>Paso 2: Diagnóstico del Sistema y Redes 💻🌐</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step5" class="task-checkbox">
+                    <label for="step5">Realizar diagnósticos de sistema y red.</label>
+                </div>
+                <p>Usa estos comandos para obtener información y solucionar problemas.</p>
+                <div class="code-block">
+                    <pre><code>systeminfo
+powercfg /batteryreport
+ping google.com
+ipconfig /release
+ipconfig /renew
+tracert google.com</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+
+                <hr class="part-divider">
+
+                <h2>Parte 3: Configuración Avanzada (Opcional para Máximo Rendimiento)</h2>
+                <p><strong>Objetivo:</strong> Redirigir los archivos temporales a un disco en la memoria RAM (RAM Disk) para acelerar procesos y reducir el desgaste del SSD.</p>
+                <div class="note">
+                    <strong>⚠️ ¡Importante!</strong> La RAM es volátil (los datos se borran al reiniciar) y se recomienda tener <strong>16 GB de RAM o más</strong> para usar esta técnica sin afectar el rendimiento del sistema.
+                </div>
+
+                <h3>Paso 1: Crear un Disco RAM (RAM Disk)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step6" class="task-checkbox">
+                    <label for="step6">Crear y configurar el RAM Disk.</label>
+                </div>
+                <p>Usaremos el software gratuito <strong>ImDisk Toolkit</strong>.</p>
+                <ol>
+                    <li>Descarga e instala ImDisk Toolkit desde una fuente segura.</li>
+                    <li>Abre la aplicación <strong>"RamDisk Configuration"</strong>.</li>
+                    <li>Configura tu disco RAM:
+                        <ul>
+                            <li><strong>Size:</strong> Entre 2 GB y 4 GB.</li>
+                            <li><strong>Drive Letter:</strong> Elige una letra libre (ej: <strong>R:</strong>).</li>
+                            <li><strong>File System:</strong> NTFS.</li>
+                            <li>Marca la opción <strong>"Create Temp Folder"</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>Haz clic en OK. La nueva unidad aparecerá en "Este equipo".</li>
+                </ol>
+
+                <h3>Paso 2: Modificar las Variables de Entorno de Windows</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step7" class="task-checkbox">
+                    <label for="step7">Redirigir las variables de entorno TEMP y TMP.</label>
+                </div>
+                <p>Ahora le diremos a Windows que use la nueva unidad para sus archivos temporales.</p>
+                <ol>
+                    <li>Presiona <strong>Windows + R</strong>, escribe el siguiente comando y presiona Enter:</li>
+                </ol>
+                 <div class="code-block">
+                    <pre><code>sysdm.cpl</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+                <ol start="2">
+                    <li>Ve a la pestaña <strong>"Opciones avanzadas"</strong> y haz clic en <strong>"Variables de entorno..."</strong>.</li>
+                    <li><strong>Para las Variables de Usuario (sección superior):</strong>
+                        <ul>
+                            <li>Haz doble clic en <strong>TEMP</strong> y cambia su valor a <strong>R:\Temp</strong>.</li>
+                            <li>Haz lo mismo para la variable <strong>TMP</strong>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Para las Variables del Sistema (sección inferior):</strong>
+                        <ul>
+                            <li>Haz doble clic en <strong>TEMP</strong> y cambia su valor a <strong>R:\Temp</strong>.</li>
+                            <li>Haz lo mismo para la variable <strong>TMP</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>Haz clic en Aceptar en todas las ventanas y <strong>reinicia tu PC</strong> para que los cambios surtan efecto.</li>
+                </ol>
 
             </div>
         </div>
@@ -198,7 +263,7 @@
 
             copyButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const codeBlock = button.previousElementSibling; // El elemento <pre><code>
+                    const codeBlock = button.previousElementSibling; // El elemento <pre>
                     const code = codeBlock.innerText;
 
                     navigator.clipboard.writeText(code).then(() => {
