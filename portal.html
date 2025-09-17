@@ -79,7 +79,8 @@
                         </div>
                     </div>
 
-                </div> </div>
+                </div> 
+            </div>
         </div>
     </main>
 
@@ -101,7 +102,12 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                auth0Client = await auth0.createAuth0Client(config);
+                // --- CORRECCIÓN APLICADA AQUÍ ---
+                auth0Client = await auth0.createAuth0Client({
+                    ...config,
+                    cacheLocation: 'localstorage' // Esta línea soluciona el problema de la recarga
+                });
+                // --- FIN DE LA CORRECCIÓN ---
 
                 if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
                     await auth0Client.handleRedirectCallback();
@@ -125,7 +131,7 @@
 
         async function loadNavMenu() {
             const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
-            const response = await fetch('assets/data/menu-links.json');
+            const response = await fetch('/assets/data/menu-links.json');
             const links = await response.json();
 
             links.forEach(link => {
