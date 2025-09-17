@@ -48,13 +48,13 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .main-nav { 
     display: none; 
     position: fixed;
-    top: 0; /* Empieza desde la parte superior */
+    top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ocupa toda la altura */
+    height: 100%;
     background-color: var(--dark-color);
-    padding-top: var(--header-height); /* Espacio para no superponerse con el header */
-    text-align: center; /* <<<--- CORRECCIÓN CLAVE: Centra el texto de los enlaces */
+    padding-top: var(--header-height);
+    text-align: center;
 }
 .main-nav.is-visible { display: block; }
 .main-nav ul { 
@@ -62,7 +62,7 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
     padding-top: 3rem; 
 }
 .main-nav li { margin: 1.5rem 0; }
-.main-nav a { font-size: 1.2rem; } /* Aumentamos un poco el tamaño para mejor toque */
+.main-nav a { font-size: 1.2rem; }
 
 /* --- Estilos para Pantallas Grandes (Desktop > 992px) --- */
 @media (min-width: 992px) {
@@ -79,7 +79,7 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
         height: 100%;
         background-color: transparent;
         padding-top: 0;
-        text-align: left; /* Revertimos el centrado en escritorio */
+        text-align: left;
     }
     .main-nav ul {
         display: flex;
