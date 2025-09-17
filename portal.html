@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Recursos - Interno</title>
-
     <meta name="robots" content="noindex, nofollow">
-
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -14,7 +12,10 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="portal.html" class="logo"><strong>(P)</strong> Portal Interno</a>
+            <a href="portal.html" class="logo">
+                <img src="https://networkcentersasvcio.com/Media/networkcenter/dayvo/logo/logo.png" alt="Logo Network Center S.A.S" class="logo-img">
+                <span>Colaboradores Network Center S.A.S</span>
+            </a>
             <nav class="main-nav">
                 <ul id="nav-menu-placeholder"></ul>
             </nav>
@@ -32,16 +33,12 @@
 
         <div class="content-area">
             <div class="container">
-
                 <div class="alert alert-info">
                     <strong>Anuncio:</strong> La nueva versión del software de monitoreo ya está disponible en la sección de descargas.
                 </div>
-
                 <h2>Programas y Herramientas Comunes</h2>
                 <p>Aquí tienes acceso rápido a las descargas más frecuentes.</p>
-                
                 <div class="grid-container grid-3-cols">
-
                     <div class="card">
                         <img src="https://images.filepuma.com/screenshots/utilities/aomei_partition_assistant_pro/wa_FP-aomei_partition_assistant_pro_f1c6687cf0a5e49553631254281.png" alt="Logo de AOMEI Partition Assistant" class="card-img">
                         <div class="card-body">
@@ -54,7 +51,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="card">
                         <img src="https://i.blogs.es/0def35/office/1366_2000.webp" alt="Logo de Microsoft Office" class="card-img">
                         <div class="card-body">
@@ -67,7 +63,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="card">
                         <img src="https://via.placeholder.com/400x180?text=Guías+de+Soporte" alt="Portada de la guía" class="card-img">
                         <div class="card-body">
@@ -78,8 +73,7 @@
                             <a href="guias.html" class="btn btn-primary">Ver Guías</a>
                         </div>
                     </div>
-
-                </div> 
+                </div>
             </div>
         </div>
     </main>
@@ -89,80 +83,69 @@
             <p>&copy; 2025 Network Center S.A.S. Portal de uso interno.</p>
         </div>
     </footer>
-
+    
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <script>
         // --- Configuración de Auth0 ---
-        const config = {
-            domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com', 
-            clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi99t8p' 
-        };
-
+        const config = { domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com', clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi9b' };
         let auth0Client = null;
-
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // --- CORRECCIÓN APLICADA AQUÍ ---
-                auth0Client = await auth0.createAuth0Client({
-                    ...config,
-                    cacheLocation: 'localstorage' // Esta línea soluciona el problema de la recarga
-                });
-                // --- FIN DE LA CORRECCIÓN ---
-
+                auth0Client = await auth0.createAuth0Client({ ...config, cacheLocation: 'localstorage' });
                 if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
                     await auth0Client.handleRedirectCallback();
                     window.history.replaceState({}, document.title, window.location.pathname);
                 }
-
                 const isAuthenticated = await auth0Client.isAuthenticated();
-
                 if (!isAuthenticated) {
-                    await auth0Client.loginWithRedirect({
-                        authorizationParams: { redirect_uri: window.location.href }
-                    });
+                    await auth0Client.loginWithRedirect({ authorizationParams: { redirect_uri: window.location.href } });
                 } else {
-                    loadNavMenu();
+                    loadPageFunctions();
                 }
             } catch (err) {
                 console.error("Error en la autenticación: ", err);
                 window.location.href = 'index.html';
             }
         });
-
-        async function loadNavMenu() {
+        async function loadPageFunctions() {
             const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
-            const response = await fetch('/assets/data/menu-links.json');
-            const links = await response.json();
-
-            links.forEach(link => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.textContent = link.texto;
-                a.href = link.url;
-                li.appendChild(a);
-                navMenuPlaceholder.appendChild(li);
-            });
-
-            const logoutLi = document.createElement('li');
-            const logoutBtn = document.createElement('a');
-            logoutBtn.textContent = 'Cerrar Sesión';
-            logoutBtn.href = '#';
-            logoutBtn.style.fontWeight = 'bold';
-            logoutBtn.onclick = () => {
-                auth0Client.logout({
-                    logoutParams: {
-                        returnTo: 'https://nc.inglucas.com.co/' 
-                    }
+            if (navMenuPlaceholder) {
+                const response = await fetch('/assets/data/menu-links.json');
+                const links = await response.json();
+                links.forEach(link => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.textContent = link.texto;
+                    a.href = link.url;
+                    li.appendChild(a);
+                    navMenuPlaceholder.appendChild(li);
                 });
-            };
-            logoutLi.appendChild(logoutBtn);
-            navMenuPlaceholder.appendChild(logoutLi);
-
+                const logoutLi = document.createElement('li');
+                const logoutBtn = document.createElement('a');
+                logoutBtn.textContent = 'Cerrar Sesión';
+                logoutBtn.href = '#';
+                logoutBtn.style.fontWeight = 'bold';
+                logoutBtn.onclick = () => { auth0Client.logout({ logoutParams: { returnTo: 'https://nc.inglucas.com.co/' } }); };
+                logoutLi.appendChild(logoutBtn);
+                navMenuPlaceholder.appendChild(logoutLi);
+            }
             const navToggle = document.querySelector('.nav-toggle');
             const mainNav = document.querySelector('.main-nav');
-            if(navToggle && mainNav) {
+            if (navToggle && mainNav) {
                 navToggle.addEventListener('click', () => mainNav.classList.toggle('is-visible'));
             }
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeBlock = button.previousElementSibling;
+                    const code = codeBlock.innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalIcon = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                        setTimeout(() => { button.innerHTML = originalIcon; }, 2000);
+                    }).catch(err => { console.error('Error al copiar: ', err); });
+                });
+            });
         }
     </script>
 
