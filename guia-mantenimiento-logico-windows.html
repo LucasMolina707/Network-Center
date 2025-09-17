@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Mantenimiento de Windows - Portal Interno</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Estilos para los checklists */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            background-color: #f0f4f8;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-color);
+        }
+        .task-checkbox {
+            width: 1.3em;
+            height: 1.3em;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .task-checkbox:checked + label {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .checklist-item label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--heading-color);
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        /* Estilos para los bloques de código con botón de copiar */
+        .code-block {
+            background-color: #2d3748; /* Un fondo oscuro para el código */
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            position: relative;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap; /* Asegura que el texto no se desborde */
+            word-wrap: break-word;
+        }
+        .code-block .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4a5568;
+            color: var(--white-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .code-block .copy-btn:hover {
+            background-color: #2c3440;
+        }
+        .note {
+            background-color: #fff8e1;
+            border-left: 5px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><strong>(P)</strong> Portal Interno</a>
+            <nav class="main-nav">
+                <ul id="nav-menu-placeholder"></ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>Guía Completa de Mantenimiento Lógico para Windows</h1>
+                <p>Prevención y Corrección para un rendimiento óptimo del sistema.</p>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="container">
+                <p>Para asegurar un rendimiento óptimo y estable de su sistema operativo Windows, es fundamental realizar un mantenimiento lógico de manera periódica. Este proceso no solo corrige problemas existentes, como la lentitud o errores inesperados, sino que también previene futuras fallas. A continuación, se detalla una guía completa con los pasos a seguir.</p>
+
+                <hr style="margin: 2rem 0;">
+
+                <h2>Mantenimiento Preventivo: La Clave para un Sistema Saludable</h2>
+                <p>Estas tareas deben realizarse de forma regular (por ejemplo, una vez al mes) para mantener el sistema en óptimas condiciones.</p>
+
+                <h3>1. Limpieza de Archivos Innecesarios</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step1" class="task-checkbox">
+                    <label for="step1">Limpiar archivos temporales y del sistema.</label>
+                </div>
+                <p>Windows acumula archivos temporales y cachés. Usa una de estas dos herramientas para eliminarlos.</p>
+                <ul>
+                    <li><strong>Sensor de Almacenamiento (Windows 10 y 11):</strong> Es la herramienta más moderna y automatizada. Ve a <strong>Configuración > Sistema > Almacenamiento</strong> y actívalo.</li>
+                    <li><strong>Liberador de espacio en disco:</strong> La herramienta clásica. Búscala en el menú de inicio y no olvides usar la opción "Limpiar archivos del sistema" para una limpieza profunda.</li>
+                </ul>
+
+                <h3>2. Desinstalar Programas No Utilizados</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step2" class="task-checkbox">
+                    <label for="step2">Revisar y desinstalar programas innecesarios.</label>
+                </div>
+                <p>Libera espacio y reduce posibles conflictos. Ve a <strong>Configuración > Aplicaciones > Aplicaciones y características</strong> y elimina lo que ya no uses.</p>
+
+                <h3>3. Optimización de Unidades (Desfragmentación)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step3" class="task-checkbox">
+                    <label for="step3">Optimizar (desfragmentar) las unidades de disco.</label>
+                </div>
+                <p>Este proceso reorganiza los datos en discos duros (HDD). En SSD, Windows realiza un proceso diferente llamado TRIM. Busca "Desfragmentar y optimizar unidades" en el menú de inicio.</p>
+                <div class="note"><strong>Nota:</strong> Nunca desfragmentes un SSD, ya que no ofrece beneficios y puede reducir su vida útil. El sistema lo optimiza automáticamente.</div>
+
+                <h3>4. Gestión de Aplicaciones de Inicio</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step4" class="task-checkbox">
+                    <label for="step4">Administrar aplicaciones de inicio.</label>
+                </div>
+                <p>Abre el <strong>Administrador de Tareas</strong> (clic derecho en la barra de tareas), ve a la pestaña "Aplicaciones de inicio" y deshabilita los programas que no sean esenciales.</p>
+                
+                <h3>5. Mantener el Sistema y los Controladores Actualizados</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step5" class="task-checkbox">
+                    <label for="step5">Buscar actualizaciones de Windows y controladores.</label>
+                </div>
+                <p>Las actualizaciones son cruciales para la seguridad. Busca en <strong>Configuración > Windows Update</strong> y en el <strong>Administrador de dispositivos</strong> para los drivers.</p>
+
+                <hr style="margin: 2rem 0;">
+
+                <h2>Mantenimiento Correctivo: Solución de Problemas Existentes</h2>
+                <p>Si el equipo ya presenta problemas, estas herramientas ayudan a diagnosticar y reparar el sistema.</p>
+
+                <h3>1. Comprobación de Errores en el Disco (CHKDSK)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step6" class="task-checkbox">
+                    <label for="step6">Realizar comprobación de errores en el disco.</label>
+                </div>
+                <p>Verifica y repara errores lógicos del disco. Ve a <strong>Explorador de archivos</strong>, clic derecho en la unidad C: > <strong>Propiedades > Herramientas > Comprobar</strong>.</p>
+
+                <h3>2. Comprobador de Archivos de Sistema (SFC)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step7" class="task-checkbox">
+                    <label for="step7">Ejecutar el Comprobador de Archivos de Sistema (SFC).</label>
+                </div>
+                <p>Escanea y repara archivos corruptos de Windows. Abre el <strong>Símbolo del sistema (CMD) como Administrador</strong> y ejecuta el siguiente comando:</p>
+                <div class="code-block">
+                    <pre><code>sfc /scannow</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+                
+                <h3>3. Reparación de la Imagen del Sistema (DISM)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="step8" class="task-checkbox">
+                    <label for="step8">Ejecutar la herramienta DISM para reparar la imagen.</label>
+                </div>
+                <p>Si SFC falla, DISM puede reparar el almacén de componentes de Windows. En el mismo <strong>Símbolo del sistema como Administrador</strong>, ejecuta:</p>
+                <div class="code-block">
+                    <pre><code>DISM /Online /Cleanup-Image /RestoreHealth</code></pre>
+                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
+                </div>
+                <p>Después de ejecutar DISM, es recomendable volver a ejecutar `sfc /scannow` para una verificación final.</p>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Nombre de tu Empresa. Portal de uso interno.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButtons = document.querySelectorAll('.copy-btn');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeBlock = button.previousElementSibling; // El elemento <pre><code>
+                    const code = codeBlock.innerText;
+
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Feedback visual para el usuario
+                        const originalIcon = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalIcon;
+                        }, 2000); // Vuelve al ícono original después de 2 segundos
+                    }).catch(err => {
+                        console.error('Error al copiar el texto: ', err);
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
