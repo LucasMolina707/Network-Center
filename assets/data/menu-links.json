@@ -1,0 +1,22 @@
+[
+    {
+        "texto": "Inicio",
+        "url": "index.html"
+    },
+    {
+        "texto": "Guías de Trabajo",
+        "url": "guias.html"
+    },
+    {
+        "texto": "Herramientas de Red",
+        "url": "herramientas.html"
+    },
+    {
+        "texto": "Descargar Software",
+        "url": "software.html"
+    },
+    {
+        "texto": "Soporte Interno",
+        "url": "soporte.html"
+    }
+]
