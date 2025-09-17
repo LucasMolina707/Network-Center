@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Título de la Página - Portal Interno</title>
+
+    <meta name="robots" content="noindex, nofollow">
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -12,7 +14,7 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="index.html" class="logo"><strong>(P)</strong> Portal Interno</a>
+            <a href="portal.html" class="logo"><strong>(P)</strong> Portal Interno</a>
             <nav class="main-nav">
                 <ul id="nav-menu-placeholder"></ul>
             </nav>
@@ -30,24 +32,25 @@
         <div class="content-area">
             <div class="container">
                 <p>Este es el cuerpo de tu nueva página. Puedes agregar texto, imágenes y usar los componentes definidos en el CSS.</p>
-
                 <div class="grid-container grid-3-cols" style="margin-top: 2rem;">
                     <div class="card"><div class="card-body"><h3>Elemento 1</h3><p>Contenido del primer elemento.</p></div></div>
                     <div class="card"><div class="card-body"><h3>Elemento 2</h3><p>Contenido del segundo elemento.</p></div></div>
                     <div class="card"><div class="card-body"><h3>Elemento 3</h3><p>Contenido del tercer elemento.</p></div></div>
                 </div>
-
-                </div>
+            </div>
         </div>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Nombre de tu Empresa. Portal de uso interno.</p>
+            <p>&copy; 2025 Network Center S.A.S. Portal de uso interno.</p>
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script>
+        const config={domain:"dev-e53jc0q5g7pd2ek6.us.auth0.com",clientId:"urDCH6ExoskeEbYxxZH7iZEPVxi99t8p"};let auth0Client=null;document.addEventListener("DOMContentLoaded",async()=>{try{auth0Client=await auth0.createAuth0Client({_config,cacheLocation:"localstorage"});if(window.location.search.includes("code=")&&window.location.search.includes("state=")){await auth0Client.handleRedirectCallback();window.history.replaceState({},document.title,window.location.pathname)}const e=await auth0Client.isAuthenticated();e?loadNavMenu():await auth0Client.loginWithRedirect({authorizationParams:{redirect_uri:window.location.href}})}catch(e){console.error("Error en la autenticación: ",e);window.location.href="index.html"}});async function loadNavMenu(){const e=document.getElementById("nav-menu-placeholder"),t=await fetch("/assets/data/menu-links.json"),o=await t.json();o.forEach(t=>{const o=document.createElement("li"),n=document.createElement("a");n.textContent=t.texto;n.href=t.url;o.appendChild(n);e.appendChild(o)});const n=document.createElement("li"),a=document.createElement("a");a.textContent="Cerrar Sesión";a.href="#";a.style.fontWeight="bold";a.onclick=()=>{auth0Client.logout({logoutParams:{returnTo:"https://nc.inglucas.com.co/"}})};n.appendChild(a);e.appendChild(n);const i=document.querySelector(".nav-toggle"),s=document.querySelector(".main-nav");i&&s&&i.addEventListener("click",()=>s.classList.toggle("is-visible"))}
+    </script>
 
 </body>
 </html>
