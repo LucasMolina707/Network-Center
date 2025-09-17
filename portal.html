@@ -84,56 +84,91 @@
         </div>
     </footer>
     
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <script>
         // --- Configuración de Auth0 ---
-        const config = { domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com', clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi9b' };
+        const config = {
+            domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com',
+            // --- ID DE CLIENTE CORREGIDO AQUÍ ---
+            clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi99t8p' 
+        };
+
         let auth0Client = null;
+
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                auth0Client = await auth0.createAuth0Client({ ...config, cacheLocation: 'localstorage' });
+                auth0Client = await auth0.createAuth0Client({
+                    ...config,
+                    cacheLocation: 'localstorage'
+                });
+
                 if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
                     await auth0Client.handleRedirectCallback();
                     window.history.replaceState({}, document.title, window.location.pathname);
                 }
+
                 const isAuthenticated = await auth0Client.isAuthenticated();
+
                 if (!isAuthenticated) {
-                    await auth0Client.loginWithRedirect({ authorizationParams: { redirect_uri: window.location.href } });
+                    await auth0Client.loginWithRedirect({
+                        authorizationParams: { redirect_uri: window.location.href }
+                    });
                 } else {
                     loadPageFunctions();
                 }
             } catch (err) {
                 console.error("Error en la autenticación: ", err);
+                // Si hay un error, redirigir al inicio para evitar bucles.
                 window.location.href = 'index.html';
             }
         });
+        
+        // Esta función ahora carga el menú Y activa otras funcionalidades de la página.
         async function loadPageFunctions() {
+            // Cargar el menú de navegación
             const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
             if (navMenuPlaceholder) {
-                const response = await fetch('/assets/data/menu-links.json');
-                const links = await response.json();
-                links.forEach(link => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.textContent = link.texto;
-                    a.href = link.url;
-                    li.appendChild(a);
-                    navMenuPlaceholder.appendChild(li);
-                });
-                const logoutLi = document.createElement('li');
-                const logoutBtn = document.createElement('a');
-                logoutBtn.textContent = 'Cerrar Sesión';
-                logoutBtn.href = '#';
-                logoutBtn.style.fontWeight = 'bold';
-                logoutBtn.onclick = () => { auth0Client.logout({ logoutParams: { returnTo: 'https://nc.inglucas.com.co/' } }); };
-                logoutLi.appendChild(logoutBtn);
-                navMenuPlaceholder.appendChild(logoutLi);
+                try {
+                    const response = await fetch('/assets/data/menu-links.json');
+                    if (!response.ok) { throw new Error('Network response was not ok'); }
+                    const links = await response.json();
+
+                    links.forEach(link => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.textContent = link.texto;
+                        a.href = link.url;
+                        li.appendChild(a);
+                        navMenuPlaceholder.appendChild(li);
+                    });
+
+                    const logoutLi = document.createElement('li');
+                    const logoutBtn = document.createElement('a');
+                    logoutBtn.textContent = 'Cerrar Sesión';
+                    logoutBtn.href = '#';
+                    logoutBtn.style.fontWeight = 'bold';
+                    logoutBtn.onclick = (e) => {
+                        e.preventDefault();
+                        auth0Client.logout({
+                            logoutParams: { returnTo: 'https://nc.inglucas.com.co/' }
+                        });
+                    };
+                    logoutLi.appendChild(logoutBtn);
+                    navMenuPlaceholder.appendChild(logoutLi);
+
+                } catch (error) {
+                    console.error('Error al cargar el menú:', error);
+                }
             }
+
+            // Activar lógica del menú móvil
             const navToggle = document.querySelector('.nav-toggle');
             const mainNav = document.querySelector('.main-nav');
-            if (navToggle && mainNav) {
+            if(navToggle && mainNav) {
                 navToggle.addEventListener('click', () => mainNav.classList.toggle('is-visible'));
             }
+
+            // Activar lógica de botones de copiar (si existen en la página)
             const copyButtons = document.querySelectorAll('.copy-btn');
             copyButtons.forEach(button => {
                 button.addEventListener('click', () => {
