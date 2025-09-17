@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Portal Interno</title>
+    <title>Portal de Recursos - Interno</title>
+
+    <meta name="robots" content="noindex, nofollow">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+
     <header class="main-header">
         <div class="container">
-            <a href="index.html" class="logo"><strong>(P)</strong> Portal Interno</a>
+            <a href="portal.html" class="logo"><strong>(P)</strong> Portal Interno</a>
             <nav class="main-nav">
                 <ul id="nav-menu-placeholder"></ul>
             </nav>
@@ -39,10 +43,10 @@
                 <div class="grid-container grid-3-cols">
 
                     <div class="card">
-                        <img src="https://images.filepuma.com/screenshots/utilities/aomei_partition_assistant_pro/wa_FP-aomei_partition_assistant_pro_f1c6687cf0a5e49553631254281.png" alt="Logo del programa" class="card-img">
+                        <img src="https://images.filepuma.com/screenshots/utilities/aomei_partition_assistant_pro/wa_FP-aomei_partition_assistant_pro_f1c6687cf0a5e49553631254281.png" alt="Logo de AOMEI Partition Assistant" class="card-img">
                         <div class="card-body">
-                            <h3>AOMEI Partition Assistant v10.8.2 All Editions, Administrador de particiones completo</h3>
-                            <p>AOMEI Partition Assistant es una herramienta versátil y potente que centraliza todas las operaciones necesarias para la administración de discos duros y particiones, destacando por su asistente para migrar el sistema operativo y la creación de medios de arranque para emergencias.</p>
+                            <h3>AOMEI Partition Assistant v10.8.2</h3>
+                            <p>Herramienta versátil para la administración de discos duros y particiones, migración de S.O. y creación de medios de arranque.</p>
                         </div>
                         <div class="card-footer">
                             <a href="https://drive.google.com/file/d/1TUDd8lOco68fmyC45E5n8AVD6e1TuHvq/view?usp=sharing" target="_blank" class="btn btn-download">
@@ -52,10 +56,10 @@
                     </div>
 
                     <div class="card">
-                        <img src="https://i.blogs.es/0def35/office/1366_2000.webp" alt="Logo del programa" class="card-img">
+                        <img src="https://i.blogs.es/0def35/office/1366_2000.webp" alt="Logo de Microsoft Office" class="card-img">
                         <div class="card-body">
-                            <h3>Office 2019</h3>
-                            <p>Office 2019 es una versión del software de productividad de Microsoft que está disponible como una compra única en una tienda minorista o a través de un contrato de licencias por volumen. Office 2019 es independiente de Office que está disponible a través de planes de Office 365 (o Microsoft 365).</p>
+                            <h3>Office 2019 Professional Plus</h3>
+                            <p>Versión del software de productividad de Microsoft disponible como una compra única bajo contrato de licencias por volumen.</p>
                         </div>
                         <div class="card-footer">
                             <a href="https://officecdn.microsoft.com/pr/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/es-ES/ProPlus2019Retail.img" target="_blank" class="btn btn-download">
@@ -65,10 +69,10 @@
                     </div>
 
                     <div class="card">
-                        <img src="https://via.placeholder.com/400x180" alt="Portada de la guía" class="card-img">
+                        <img src="https://via.placeholder.com/400x180?text=Guías+de+Soporte" alt="Portada de la guía" class="card-img">
                         <div class="card-body">
-                            <h3>Guía de Soporte Nivel 1</h3>
-                            <p>Documento con los procedimientos estándar para la atención de tickets de soporte.</p>
+                            <h3>Guías de Soporte Nivel 1</h3>
+                            <p>Documentos con los procedimientos estándar para la atención de tickets y mantenimientos.</p>
                         </div>
                         <div class="card-footer">
                             <a href="guias.html" class="btn btn-primary">Ver Guías</a>
@@ -81,10 +85,80 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Nombre de tu Empresa. Portal de uso interno.</p>
+            <p>&copy; 2025 Network Center S.A.S. Portal de uso interno.</p>
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script>
+        // --- Configuración de Auth0 ---
+        const config = {
+            domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com', 
+            clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi99t8p' 
+        };
+
+        let auth0Client = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                auth0Client = await auth0.createAuth0Client(config);
+
+                if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+                    await auth0Client.handleRedirectCallback();
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+
+                const isAuthenticated = await auth0Client.isAuthenticated();
+
+                if (!isAuthenticated) {
+                    await auth0Client.loginWithRedirect({
+                        authorizationParams: { redirect_uri: window.location.href }
+                    });
+                } else {
+                    loadNavMenu();
+                }
+            } catch (err) {
+                console.error("Error en la autenticación: ", err);
+                window.location.href = 'index.html';
+            }
+        });
+
+        async function loadNavMenu() {
+            const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
+            const response = await fetch('assets/data/menu-links.json');
+            const links = await response.json();
+
+            links.forEach(link => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = link.texto;
+                a.href = link.url;
+                li.appendChild(a);
+                navMenuPlaceholder.appendChild(li);
+            });
+
+            const logoutLi = document.createElement('li');
+            const logoutBtn = document.createElement('a');
+            logoutBtn.textContent = 'Cerrar Sesión';
+            logoutBtn.href = '#';
+            logoutBtn.style.fontWeight = 'bold';
+            logoutBtn.onclick = () => {
+                auth0Client.logout({
+                    logoutParams: {
+                        returnTo: 'https://nc.inglucas.com.co/' 
+                    }
+                });
+            };
+            logoutLi.appendChild(logoutBtn);
+            navMenuPlaceholder.appendChild(logoutLi);
+
+            const navToggle = document.querySelector('.nav-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if(navToggle && mainNav) {
+                navToggle.addEventListener('click', () => mainNav.classList.toggle('is-visible'));
+            }
+        }
+    </script>
+
 </body>
 </html>
