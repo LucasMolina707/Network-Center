@@ -40,24 +40,29 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 
 /* Logo (Móvil) */
 .main-header .logo { display: flex; align-items: center; gap: 10px; font-size: 1rem; font-weight: normal; }
-.logo-svg { height: 40px; width: auto; fill: var(--white-color); /* Color del SVG */ }
+.logo-svg { height: 40px; width: auto; fill: var(--white-color); }
 .main-header .logo span { color: var(--white-color); }
 
 /* Navegación (Base para Móvil) */
+.nav-toggle { display: block; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; z-index: 1001; }
 .main-nav { 
-    display: none; /* Oculto por defecto */
+    display: none; 
     position: fixed;
-    top: var(--header-height);
+    top: 0; /* Empieza desde la parte superior */
     left: 0;
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: 100%; /* Ocupa toda la altura */
     background-color: var(--dark-color);
-    padding-top: 2rem;
+    padding-top: var(--header-height); /* Espacio para no superponerse con el header */
+    text-align: center; /* <<<--- CORRECCIÓN CLAVE: Centra el texto de los enlaces */
 }
-.main-nav.is-visible { display: block; /* Se muestra con JS */ }
-.main-nav ul { flex-direction: column; align-items: center; }
-.main-nav li { margin: 1rem 0; }
-.nav-toggle { display: block; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; }
+.main-nav.is-visible { display: block; }
+.main-nav ul { 
+    flex-direction: column; 
+    padding-top: 3rem; 
+}
+.main-nav li { margin: 1.5rem 0; }
+.main-nav a { font-size: 1.2rem; } /* Aumentamos un poco el tamaño para mejor toque */
 
 /* --- Estilos para Pantallas Grandes (Desktop > 992px) --- */
 @media (min-width: 992px) {
@@ -65,21 +70,26 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
     h2 { font-size: 2rem; }
     .content-split { grid-template-columns: 1fr 1fr; }
     
-    .nav-toggle { display: none; } /* Ocultamos botón hamburguesa */
+    .nav-toggle { display: none; } 
     
     .main-nav {
-        display: flex; /* Mostramos la navegación */
+        display: flex; 
         position: static;
         width: auto;
         height: 100%;
         background-color: transparent;
         padding-top: 0;
+        text-align: left; /* Revertimos el centrado en escritorio */
     }
     .main-nav ul {
-        flex-direction: row; /* La ponemos horizontal */
+        display: flex;
+        flex-direction: row; 
+        align-items: center;
         height: 100%;
+        padding-top: 0;
     }
     .main-nav li { margin: 0 0 0 25px; }
+    .main-nav a { font-size: 1rem; }
     .main-header .logo { font-size: 1.1rem; gap: 15px; }
     .logo-svg { height: 45px; }
 }
