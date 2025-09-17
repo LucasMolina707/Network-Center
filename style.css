@@ -43,17 +43,20 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .nav-toggle { display: none; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; }
 .main-footer { background-color: #061a38; color: #ccc; padding: 2rem 0; text-align: center; }
 
-/* --- Logo del Header (Actualizado) --- */
+/* --- Logo del Header (CORREGIDO) --- */
 .main-header .logo {
     display: flex;
     align-items: center;
     gap: 15px;
     font-size: 1.1rem;
     font-weight: normal;
+    color: var(--white-color);
 }
 .main-header .logo-img {
-    height: 40px;
+    max-height: 45px;
     width: auto;
+    object-fit: contain;
+    display: block;
 }
 
 /* --- Botones --- */
