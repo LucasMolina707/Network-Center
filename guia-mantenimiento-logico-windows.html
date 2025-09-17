@@ -108,9 +108,99 @@ tracert google.com</code></pre><button class="copy-btn" title="Copiar al portapa
         </div>
     </footer>
 
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <script>
-        const config={domain:"dev-e53jc0q5g7pd2ek6.us.auth0.com",clientId:"urDCH6ExoskeEbYxxZH7iZEPVxi99t8p"};let auth0Client=null;document.addEventListener("DOMContentLoaded",async()=>{try{auth0Client=await auth0.createAuth0Client({_config,cacheLocation:"localstorage"});if(window.location.search.includes("code=")&&window.location.search.includes("state=")){await auth0Client.handleRedirectCallback();window.history.replaceState({},document.title,window.location.pathname)}const e=await auth0Client.isAuthenticated();e?loadNavMenu():await auth0Client.loginWithRedirect({authorizationParams:{redirect_uri:window.location.href}})}catch(e){console.error("Error en la autenticación: ",e);window.location.href="index.html"}});async function loadNavMenu(){const e=document.getElementById("nav-menu-placeholder"),t=await fetch("/assets/data/menu-links.json"),o=await t.json();o.forEach(t=>{const o=document.createElement("li"),n=document.createElement("a");n.textContent=t.texto;n.href=t.url;o.appendChild(n);e.appendChild(o)});const n=document.createElement("li"),a=document.createElement("a");a.textContent="Cerrar Sesión";a.href="#";a.style.fontWeight="bold";a.onclick=()=>{auth0Client.logout({logoutParams:{returnTo:"https://nc.inglucas.com.co/"}})};n.appendChild(a);e.appendChild(n);const i=document.querySelector(".nav-toggle"),s=document.querySelector(".main-nav");i&&s&&i.addEventListener("click",()=>s.classList.toggle("is-visible"));const d=document.querySelectorAll(".copy-btn");d.forEach(e=>{e.addEventListener("click",()=>{const t=e.previousElementSibling.innerText;navigator.clipboard.writeText(t).then(()=>{const t=e.innerHTML;e.innerHTML='<i class="fas fa-check"></i> Copiado';setTimeout(()=>{e.innerHTML=t},2e3)}).catch(e=>{console.error("Error al copiar el texto: ",e)})})})}
+        // --- Configuración de Auth0 ---
+        const config = {
+            domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com', 
+            clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi99t8p' 
+        };
+
+        let auth0Client = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // --- CORRECCIÓN APLICADA AQUÍ ---
+                // Se corrigió "_config" a "...config" para que la configuración se cargue correctamente.
+                auth0Client = await auth0.createAuth0Client({
+                    ...config,
+                    cacheLocation: 'localstorage'
+                });
+                // --- FIN DE LA CORRECCIÓN ---
+
+                if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+                    await auth0Client.handleRedirectCallback();
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+
+                const isAuthenticated = await auth0Client.isAuthenticated();
+
+                if (!isAuthenticated) {
+                    await auth0Client.loginWithRedirect({
+                        authorizationParams: { redirect_uri: window.location.href }
+                    });
+                } else {
+                    // Si el usuario está autenticado, cargamos el menú y cualquier otra función de la página.
+                    loadPageFunctions();
+                }
+            } catch (err) {
+                console.error("Error en la autenticación: ", err);
+                window.location.href = 'index.html';
+            }
+        });
+        
+        // Esta función ahora carga el menú Y activa otras funcionalidades de la página.
+        async function loadPageFunctions() {
+            // Cargar el menú de navegación
+            const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
+            if (navMenuPlaceholder) {
+                const response = await fetch('/assets/data/menu-links.json');
+                const links = await response.json();
+
+                links.forEach(link => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.textContent = link.texto;
+                    a.href = link.url;
+                    li.appendChild(a);
+                    navMenuPlaceholder.appendChild(li);
+                });
+
+                const logoutLi = document.createElement('li');
+                const logoutBtn = document.createElement('a');
+                logoutBtn.textContent = 'Cerrar Sesión';
+                logoutBtn.href = '#';
+                logoutBtn.style.fontWeight = 'bold';
+                logoutBtn.onclick = () => {
+                    auth0Client.logout({
+                        logoutParams: { returnTo: 'https://nc.inglucas.com.co/' }
+                    });
+                };
+                logoutLi.appendChild(logoutBtn);
+                navMenuPlaceholder.appendChild(logoutLi);
+            }
+
+            // Activar lógica del menú móvil
+            const navToggle = document.querySelector('.nav-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if(navToggle && mainNav) {
+                navToggle.addEventListener('click', () => mainNav.classList.toggle('is-visible'));
+            }
+
+            // Activar lógica de botones de copiar (si existen en la página)
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeBlock = button.previousElementSibling;
+                    const code = codeBlock.innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalIcon = button.innerHTML;
+                        button.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                        setTimeout(() => { button.innerHTML = originalIcon; }, 2000);
+                    }).catch(err => { console.error('Error al copiar: ', err); });
+                });
+            });
+        }
     </script>
 
 </body>
