@@ -18,7 +18,7 @@
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo"><strong>(N)</strong> Network Center</a>
-            <a href="portal.html" class="btn btn-primary">Acceso Colaboradores</a>
+            <a href="#" id="login-button" class="btn btn-primary">Acceso Colaboradores</a>
         </div>
     </header>
 
@@ -32,6 +32,7 @@
                     <a href="https://networkcentersasvcio.com/" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">
                         <i class="fas fa-globe"></i> Visita Nuestro Sitio Web Oficial
                     </a>
+
                     <h3 style="margin-top: 2rem;">Servicios de Mantenimiento</h3>
                     <p>Ofrecemos planes de mantenimiento preventivo y correctivo ajustados a las necesidades de su empresa, asegurando la continuidad de sus operaciones sin interrupciones.</p>
                 </div>
@@ -68,7 +69,32 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const config = {
+                domain: 'dev-e53jc0q5g7pd2ek6.us.auth0.com',
+                clientId: 'urDCH6ExoskeEbYxxZH7iZEPVxi99t8p'
+            };
+            
+            let auth0Client = null;
+
+            try {
+                auth0Client = await auth0.createAuth0Client(config);
+
+                document.getElementById('login-button').addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    await auth0Client.loginWithRedirect({
+                        authorizationParams: {
+                            redirect_uri: 'https://nc.inglucas.com.co/portal.html'
+                        }
+                    });
+                });
+            } catch (err) {
+                console.error("Error al inicializar Auth0: ", err);
+            }
+        });
+    </script>
 
 </body>
 </html>
