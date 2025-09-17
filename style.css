@@ -28,7 +28,8 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .page-header { background: var(--white-color); padding: 2rem 0; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; }
 .content-area { padding: 2rem 0; }
 .grid-container { display: grid; gap: 1.5rem; }
-.grid-3-cols { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+/* MEJORA: Se ajustó el minmax para mejor adaptación en móviles */
+.grid-3-cols { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .content-split { display: grid; gap: 2rem; align-items: center; }
 @media (min-width: 768px) { .content-split { grid-template-columns: 1fr 1fr; } }
 
@@ -43,21 +44,9 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .nav-toggle { display: none; background: none; border: none; font-size: 1.8rem; color: var(--white-color); cursor: pointer; }
 .main-footer { background-color: #061a38; color: #ccc; padding: 2rem 0; text-align: center; }
 
-/* --- Logo del Header (CORREGIDO) --- */
-.main-header .logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-    font-weight: normal;
-    color: var(--white-color);
-}
-.main-header .logo-img {
-    max-height: 45px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-}
+/* --- Logo del Header --- */
+.main-header .logo { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; font-weight: normal; color: var(--white-color); }
+.main-header .logo-img { max-height: 45px; width: auto; object-fit: contain; display: block; }
 
 /* --- Botones --- */
 .btn { display: inline-block; padding: 10px 20px; border-radius: var(--border-radius); font-weight: bold; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; }
@@ -83,8 +72,17 @@ main { padding-top: var(--header-height); min-height: calc(100vh - 150px); }
 .alert-info { background-color: #e2f3ff; border-color: #b6e0fe; color: #0a58ca; }
 .alert-warning { background-color: #fff8e1; border-color: #ffecb3; color: #665100; }
 
-/* ===== RESPONSIVIDAD ===== */
+/* ===== RESPONSIVIDAD (MEJORADA) ===== */
 @media (max-width: 768px) {
+    /* --- MEJORA: Ajuste de tamaño de títulos en móvil --- */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+
+    /* --- MEJORA: Ajuste del logo en móvil --- */
+    .main-header .logo { font-size: 1rem; gap: 10px; }
+    .main-header .logo-img { max-height: 40px; }
+    
+    /* --- Lógica del menú móvil --- */
     .main-nav { position: fixed; top: var(--header-height); left: 0; background: var(--dark-color); width: 100%; height: calc(100vh - var(--header-height)); transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
     .main-nav.is-visible { transform: translateX(0); }
     .main-nav ul { flex-direction: column; align-items: center; padding-top: 3rem; }
