@@ -5,88 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía Definitiva de Mantenimiento de Windows - Portal Interno</title>
     
+    <meta name="robots" content="noindex, nofollow">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* Estilos para los checklists */
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            background-color: #f0f4f8;
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary-color);
-        }
-        .task-checkbox {
-            width: 1.3em;
-            height: 1.3em;
-            margin-right: 12px;
-            cursor: pointer;
-        }
-        .task-checkbox:checked + label {
-            text-decoration: line-through;
-            color: #888;
-        }
-        .checklist-item label {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--heading-color);
-            cursor: pointer;
-            flex-grow: 1;
-        }
-
-        /* Estilos para los bloques de código con botón de copiar */
-        .code-block {
-            background-color: #2d3748; /* Un fondo oscuro para el código */
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            margin: 1rem 0;
-            position: relative;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap; /* Asegura que el texto no se desborde */
-            word-wrap: break-word;
-        }
-        .code-block .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #4a5568;
-            color: var(--white-color);
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .code-block .copy-btn:hover {
-            background-color: #2c3440;
-        }
-        .note {
-            background-color: #fff8e1;
-            border-left: 5px solid var(--warning-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: var(--border-radius);
-        }
-        .part-divider {
-            border: 0;
-            height: 2px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--dark-color), rgba(0, 0, 0, 0));
-            margin: 3rem 0;
-        }
+        .checklist-item{display:flex;align-items:center;margin-bottom:.5rem;background-color:#f0f4f8;padding:10px 15px;border-radius:var(--border-radius);border-left:5px solid var(--primary-color)}.task-checkbox{width:1.3em;height:1.3em;margin-right:12px;cursor:pointer}.task-checkbox:checked+label{text-decoration:line-through;color:#888}.checklist-item label{font-size:1.1rem;font-weight:700;color:var(--heading-color);cursor:pointer;flex-grow:1}.code-block{background-color:#2d3748;color:#e2e8f0;padding:1rem;border-radius:var(--border-radius);margin:1rem 0;position:relative;font-family:'Courier New',Courier,monospace}.code-block pre{margin:0;white-space:pre-wrap;word-wrap:break-word}.code-block .copy-btn{position:absolute;top:10px;right:10px;background-color:#4a5568;color:var(--white-color);border:none;padding:5px 10px;border-radius:5px;cursor:pointer;transition:background-color .2s}.code-block .copy-btn:hover{background-color:#2c3440}.note{background-color:#fff8e1;border-left:5px solid var(--warning-color);padding:1rem;margin:1.5rem 0;border-radius:var(--border-radius)}.part-divider{border:0;height:2px;background-image:linear-gradient(to right,transparent,var(--dark-color),transparent);margin:3rem 0}
     </style>
 </head>
 <body>
 
     <header class="main-header">
         <div class="container">
-            <a href="index.html" class="logo"><strong>(P)</strong> Portal Interno</a>
+            <a href="portal.html" class="logo"><strong>(P)</strong> Portal Interno</a>
             <nav class="main-nav">
                 <ul id="nav-menu-placeholder"></ul>
             </nav>
@@ -120,130 +52,51 @@
                 </ul>
 
                 <h3>Paso 2: Optimización del Sistema y Aplicaciones ⚙️</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step2" class="task-checkbox">
-                    <label for="step2">Optimizar aplicaciones y unidades.</label>
-                </div>
-                <ul>
-                    <li><strong>Desinstalar Programas No Utilizados:</strong> Ve a <strong>Configuración > Aplicaciones</strong> y elimina lo que no necesites.</li>
-                    <li><strong>Gestionar Aplicaciones de Inicio:</strong> Abre el <strong>Administrador de tareas</strong> (Ctrl + Shift + Esc), ve a "Aplicaciones de inicio" y deshabilita los no esenciales.</li>
-                    <li><strong>Optimizar Unidades:</strong> Busca "Desfragmentar y optimizar unidades" y ejecuta la optimización para tu unidad C:.</li>
-                </ul>
-
+                <div class="checklist-item"><input type="checkbox" id="step2" class="task-checkbox"><label for="step2">Optimizar aplicaciones y unidades.</label></div>
+                <ul><li><strong>Desinstalar Programas No Utilizados:</strong> Ve a <strong>Configuración > Aplicaciones</strong> y elimina lo que no necesites.</li><li><strong>Gestionar Aplicaciones de Inicio:</strong> Abre el <strong>Administrador de tareas</strong> (Ctrl + Shift + Esc), ve a "Aplicaciones de inicio" y deshabilita los no esenciales.</li><li><strong>Optimizar Unidades:</strong> Busca "Desfragmentar y optimizar unidades" y ejecuta la optimización para tu unidad C:.</li></ul>
+                
                 <h3>Paso 3: Actualización del Sistema y Controladores 🔄</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step3" class="task-checkbox">
-                    <label for="step3">Verificar actualizaciones de Windows y Drivers.</label>
-                </div>
-                <ul>
-                    <li><strong>Windows Update:</strong> Ve a <strong>Configuración > Windows Update</strong> y busca actualizaciones.</li>
-                    <li><strong>Controladores (Drivers):</strong> Usa el "Administrador de dispositivos" para actualizar o ejecuta el siguiente comando en CMD para ver una lista de los drivers instalados.</li>
-                </ul>
-                <div class="code-block">
-                    <pre><code>driverquery</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
+                <div class="checklist-item"><input type="checkbox" id="step3" class="task-checkbox"><label for="step3">Verificar actualizaciones de Windows y Drivers.</label></div>
+                <ul><li><strong>Windows Update:</strong> Ve a <strong>Configuración > Windows Update</strong> y busca actualizaciones.</li><li><strong>Controladores (Drivers):</strong> Usa el "Administrador de dispositivos" para actualizar o ejecuta el siguiente comando en CMD para ver una lista de los drivers instalados.</li></ul>
+                <div class="code-block"><pre><code>driverquery</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
 
                 <hr class="part-divider">
 
                 <h2>Parte 2: Mantenimiento Correctivo y Diagnóstico Avanzado</h2>
                 <p>Ejecuta estos pasos si experimentas problemas. Debes usar el "Símbolo del sistema" o "Terminal" como Administrador.</p>
-                
                 <h3>Paso 1: Verificación y Reparación del Sistema de Archivos 🛠️</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step4" class="task-checkbox">
-                    <label for="step4">Ejecutar reparación integral del sistema (DISM, SFC, CHKDSK).</label>
-                </div>
+                <div class="checklist-item"><input type="checkbox" id="step4" class="task-checkbox"><label for="step4">Ejecutar reparación integral del sistema (DISM, SFC, CHKDSK).</label></div>
                 <p>Ejecuta estos tres comandos en orden para una reparación completa.</p>
-                <p><strong>1. DISM (Reparación de la Imagen del Sistema):</strong></p>
-                <div class="code-block">
-                    <pre><code>DISM /Online /Cleanup-Image /RestoreHealth</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
-                <p><strong>2. SFC (Comprobador de Archivos de Sistema):</strong></p>
-                <div class="code-block">
-                    <pre><code>sfc /scannow</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
-                <p><strong>3. CHKDSK (Comprobación de Errores del Disco):</strong> Requiere un reinicio.</p>
-                <div class="code-block">
-                    <pre><code>chkdsk C: /f /r</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
+                <p><strong>1. DISM:</strong></p><div class="code-block"><pre><code>DISM /Online /Cleanup-Image /RestoreHealth</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
+                <p><strong>2. SFC:</strong></p><div class="code-block"><pre><code>sfc /scannow</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
+                <p><strong>3. CHKDSK:</strong></p><div class="code-block"><pre><code>chkdsk C: /f /r</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
 
                 <h3>Paso 2: Diagnóstico del Sistema y Redes 💻🌐</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step5" class="task-checkbox">
-                    <label for="step5">Realizar diagnósticos de sistema y red.</label>
-                </div>
+                <div class="checklist-item"><input type="checkbox" id="step5" class="task-checkbox"><label for="step5">Realizar diagnósticos de sistema y red.</label></div>
                 <p>Usa estos comandos para obtener información y solucionar problemas.</p>
-                <div class="code-block">
-                    <pre><code>systeminfo
+                <div class="code-block"><pre><code>systeminfo
 powercfg /batteryreport
 ping google.com
 ipconfig /release
 ipconfig /renew
-tracert google.com</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
+tracert google.com</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
 
                 <hr class="part-divider">
 
                 <h2>Parte 3: Configuración Avanzada (Opcional para Máximo Rendimiento)</h2>
                 <p><strong>Objetivo:</strong> Redirigir los archivos temporales a un disco en la memoria RAM (RAM Disk) para acelerar procesos y reducir el desgaste del SSD.</p>
-                <div class="note">
-                    <strong>⚠️ ¡Importante!</strong> La RAM es volátil (los datos se borran al reiniciar) y se recomienda tener <strong>16 GB de RAM o más</strong> para usar esta técnica sin afectar el rendimiento del sistema.
-                </div>
-
+                <div class="note"><strong>⚠️ ¡Importante!</strong> La RAM es volátil y se recomienda tener <strong>16 GB de RAM o más</strong>.</div>
                 <h3>Paso 1: Crear un Disco RAM (RAM Disk)</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step6" class="task-checkbox">
-                    <label for="step6">Crear y configurar el RAM Disk.</label>
-                </div>
+                <div class="checklist-item"><input type="checkbox" id="step6" class="task-checkbox"><label for="step6">Crear y configurar el RAM Disk.</label></div>
                 <p>Usaremos el software gratuito <strong>ImDisk Toolkit</strong>.</p>
-                <ol>
-                    <li>Descarga e instala ImDisk Toolkit desde una fuente segura.</li>
-                    <li>Abre la aplicación <strong>"RamDisk Configuration"</strong>.</li>
-                    <li>Configura tu disco RAM:
-                        <ul>
-                            <li><strong>Size:</strong> Entre 2 GB y 4 GB.</li>
-                            <li><strong>Drive Letter:</strong> Elige una letra libre (ej: <strong>R:</strong>).</li>
-                            <li><strong>File System:</strong> NTFS.</li>
-                            <li>Marca la opción <strong>"Create Temp Folder"</strong>.</li>
-                        </ul>
-                    </li>
-                    <li>Haz clic en OK. La nueva unidad aparecerá en "Este equipo".</li>
-                </ol>
-
+                <ol><li>Descarga e instala ImDisk Toolkit.</li><li>Abre la aplicación <strong>"RamDisk Configuration"</strong>.</li><li>Configura tu disco RAM:<ul><li><strong>Size:</strong> Entre 2 GB y 4 GB.</li><li><strong>Drive Letter:</strong> Elige una letra libre (ej: <strong>R:</strong>).</li><li><strong>File System:</strong> NTFS.</li><li>Marca la opción <strong>"Create Temp Folder"</strong>.</li></ul></li><li>Haz clic en OK.</li></ol>
+                
                 <h3>Paso 2: Modificar las Variables de Entorno de Windows</h3>
-                <div class="checklist-item">
-                    <input type="checkbox" id="step7" class="task-checkbox">
-                    <label for="step7">Redirigir las variables de entorno TEMP y TMP.</label>
-                </div>
-                <p>Ahora le diremos a Windows que use la nueva unidad para sus archivos temporales.</p>
-                <ol>
-                    <li>Presiona <strong>Windows + R</strong>, escribe el siguiente comando y presiona Enter:</li>
-                </ol>
-                 <div class="code-block">
-                    <pre><code>sysdm.cpl</code></pre>
-                    <button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button>
-                </div>
-                <ol start="2">
-                    <li>Ve a la pestaña <strong>"Opciones avanzadas"</strong> y haz clic en <strong>"Variables de entorno..."</strong>.</li>
-                    <li><strong>Para las Variables de Usuario (sección superior):</strong>
-                        <ul>
-                            <li>Haz doble clic en <strong>TEMP</strong> y cambia su valor a <strong>R:\Temp</strong>.</li>
-                            <li>Haz lo mismo para la variable <strong>TMP</strong>.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Para las Variables del Sistema (sección inferior):</strong>
-                        <ul>
-                            <li>Haz doble clic en <strong>TEMP</strong> y cambia su valor a <strong>R:\Temp</strong>.</li>
-                            <li>Haz lo mismo para la variable <strong>TMP</strong>.</li>
-                        </ul>
-                    </li>
-                    <li>Haz clic en Aceptar en todas las ventanas y <strong>reinicia tu PC</strong> para que los cambios surtan efecto.</li>
-                </ol>
+                <div class="checklist-item"><input type="checkbox" id="step7" class="task-checkbox"><label for="step7">Redirigir las variables de entorno TEMP y TMP.</label></div>
+                <p>Ahora le diremos a Windows que use la nueva unidad.</p>
+                <ol><li>Presiona <strong>Windows + R</strong>, y ejecuta:</li></ol>
+                <div class="code-block"><pre><code>sysdm.cpl</code></pre><button class="copy-btn" title="Copiar al portapapeles"><i class="far fa-copy"></i></button></div>
+                <ol start="2"><li>Ve a <strong>"Opciones avanzadas" > "Variables de entorno..."</strong>.</li><li><strong>Para Variables de Usuario y de Sistema:</strong> Cambia el valor de <strong>TEMP</strong> y <strong>TMP</strong> a <strong>R:\Temp</strong>.</li><li>Haz clic en Aceptar y <strong>reinicia tu PC</strong>.</li></ol>
 
             </div>
         </div>
@@ -251,35 +104,13 @@ tracert google.com</code></pre>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Nombre de tu Empresa. Portal de uso interno.</p>
+            <p>&copy; 2025 Network Center S.A.S. Portal de uso interno.</p>
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
-
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const copyButtons = document.querySelectorAll('.copy-btn');
-
-            copyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeBlock = button.previousElementSibling; // El elemento <pre>
-                    const code = codeBlock.innerText;
-
-                    navigator.clipboard.writeText(code).then(() => {
-                        // Feedback visual para el usuario
-                        const originalIcon = button.innerHTML;
-                        button.innerHTML = '<i class="fas fa-check"></i> Copiado';
-                        
-                        setTimeout(() => {
-                            button.innerHTML = originalIcon;
-                        }, 2000); // Vuelve al ícono original después de 2 segundos
-                    }).catch(err => {
-                        console.error('Error al copiar el texto: ', err);
-                    });
-                });
-            });
-        });
+        const config={domain:"dev-e53jc0q5g7pd2ek6.us.auth0.com",clientId:"urDCH6ExoskeEbYxxZH7iZEPVxi99t8p"};let auth0Client=null;document.addEventListener("DOMContentLoaded",async()=>{try{auth0Client=await auth0.createAuth0Client({_config,cacheLocation:"localstorage"});if(window.location.search.includes("code=")&&window.location.search.includes("state=")){await auth0Client.handleRedirectCallback();window.history.replaceState({},document.title,window.location.pathname)}const e=await auth0Client.isAuthenticated();e?loadNavMenu():await auth0Client.loginWithRedirect({authorizationParams:{redirect_uri:window.location.href}})}catch(e){console.error("Error en la autenticación: ",e);window.location.href="index.html"}});async function loadNavMenu(){const e=document.getElementById("nav-menu-placeholder"),t=await fetch("/assets/data/menu-links.json"),o=await t.json();o.forEach(t=>{const o=document.createElement("li"),n=document.createElement("a");n.textContent=t.texto;n.href=t.url;o.appendChild(n);e.appendChild(o)});const n=document.createElement("li"),a=document.createElement("a");a.textContent="Cerrar Sesión";a.href="#";a.style.fontWeight="bold";a.onclick=()=>{auth0Client.logout({logoutParams:{returnTo:"https://nc.inglucas.com.co/"}})};n.appendChild(a);e.appendChild(n);const i=document.querySelector(".nav-toggle"),s=document.querySelector(".main-nav");i&&s&&i.addEventListener("click",()=>s.classList.toggle("is-visible"));const d=document.querySelectorAll(".copy-btn");d.forEach(e=>{e.addEventListener("click",()=>{const t=e.previousElementSibling.innerText;navigator.clipboard.writeText(t).then(()=>{const t=e.innerHTML;e.innerHTML='<i class="fas fa-check"></i> Copiado';setTimeout(()=>{e.innerHTML=t},2e3)}).catch(e=>{console.error("Error al copiar el texto: ",e)})})})}
     </script>
 
 </body>
