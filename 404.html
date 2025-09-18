@@ -5,145 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Página no encontrada - Network Center S.A.S</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        /* Estilos específicos para la página 404 */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--white-color); /* Color de fondo de tu sitio */
-            color: var(--heading-color); /* Color de texto principal */
-            font-family: var(--font-family); /* Asegúrate de definir esta variable en style.css */
-            overflow: hidden; /* Para que el gato no se desborde */
-            position: relative;
-        }
-
-        .main-header, .main-footer {
-            width: 100%;
-            position: absolute;
-            z-index: 10;
-        }
-
-        .main-header {
-            top: 0;
-            background-color: rgba(255, 255, 255, 0.9); /* Un poco transparente para no ocultar el contenido */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .main-footer {
-            bottom: 0;
-            background-color: var(--dark-color);
-            color: var(--white-color);
-            padding: 1rem 0;
-            text-align: center;
-        }
-
-        .content-404 {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            margin-top: 80px; /* Para dejar espacio al header */
-            margin-bottom: 80px; /* Para dejar espacio al footer */
-            z-index: 5; /* Asegura que el contenido esté por encima del gato */
-            position: relative;
-        }
-
-        .content-404 h1 {
-            font-size: 6rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color); /* O un color de acento que tengas */
-            animation: bounceIn 1s ease-out;
-        }
-
-        .content-404 h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-        }
-
-        .content-404 p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .content-404 .btn-home {
-            background-color: var(--primary-color); /* Color de tu botón principal */
-            color: var(--white-color);
-            padding: 12px 25px;
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-
-        .content-404 .btn-home:hover {
-            background-color: var(--secondary-color); /* Un color para el hover */
-        }
-
-        /* Animación del gato */
-        #cat {
-            position: absolute;
-            width: 80px; /* Tamaño del gato */
-            height: 80px;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Cat_animated.gif'); /* Un GIF de un gato corriendo/jugando */
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none; /* Ignora eventos del ratón */
-            z-index: 1; /* Detrás del texto */
-            transform: translate(-50%, -50%); /* Centra el gato en su posición (X,Y) */
-        }
-
-        /* Keyframes para la animación del título */
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
-        /* Media Queries para responsividad */
-        @media (max-width: 768px) {
-            .content-404 h1 {
-                font-size: 4rem;
-            }
-            .content-404 h2 {
-                font-size: 1.5rem;
-            }
-            .content-404 p {
-                font-size: 1rem;
-            }
-            #cat {
-                width: 60px;
-                height: 60px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body>
+<body class="error-page">
 
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo"><strong>(N)</strong> Network Center</a>
-            </div>
+        </div>
     </header>
 
     <main class="content-404">
@@ -154,7 +24,9 @@
         <a href="index.html" class="btn btn-home">Volver a Inicio</a>
     </main>
 
-    <div id="cat"></div> <footer class="main-footer">
+    <div id="cat"></div>
+    
+    <footer class="main-footer">
         <div class="container">
             <p>&copy; 2025 Network Center S.A.S. Todos los derechos reservados.</p>
         </div>
@@ -167,14 +39,12 @@
             let mouseY = 0;
             let catX = window.innerWidth / 2;
             let catY = window.innerHeight / 2;
-            const speed = 0.08; // Velocidad del gato
-            const maxDistance = 300; // Distancia máxima a la que el gato sigue al cursor
+            const speed = 0.08;
+            const maxDistance = 300;
 
-            // Ocultar el gato al inicio para que no aparezca en una posición extraña
             cat.style.opacity = '0';
             cat.style.transition = 'opacity 0.5s ease-in-out';
 
-            // Mostrar el gato después de un breve retraso
             setTimeout(() => {
                 cat.style.opacity = '1';
                 cat.style.left = `${catX}px`;
@@ -187,23 +57,20 @@
             });
 
             function animateCat() {
-                // Calcular la distancia al cursor
                 const deltaX = mouseX - catX;
                 const deltaY = mouseY - catY;
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-                // Solo mover si el cursor está a una distancia razonable
-                if (distance > 20) { // Un pequeño umbral para evitar jitter
+                if (distance > 20) {
                     catX += deltaX * speed;
                     catY += deltaY * speed;
 
                     cat.style.left = `${catX}px`;
                     cat.style.top = `${catY}px`;
 
-                    // Ajustar la dirección del GIF del gato
-                    if (deltaX < 0) { // Moviéndose a la izquierda
+                    if (deltaX < 0) {
                         cat.style.transform = 'translate(-50%, -50%) scaleX(-1)';
-                    } else { // Moviéndose a la derecha
+                    } else {
                         cat.style.transform = 'translate(-50%, -50%) scaleX(1)';
                     }
                 }
@@ -214,4 +81,5 @@
         });
     </script>
 </body>
+</html>
 </html>
