@@ -169,7 +169,7 @@
                 const deltaX = mouseX - catX;
                 const deltaY = mouseY - catY;
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
+                
                 if (distance > 50) { 
                     const dirX = deltaX / distance;
                     const dirY = deltaY / distance;
@@ -188,3 +188,16 @@
                 }
 
                 catX += catVelocityX;
+                catY += catVelocityY;
+                
+                cat.style.left = `${catX}px`;
+                cat.style.top = `${catY}px`;
+                
+                requestAnimationFrame(animateCat);
+            }
+
+            animateCat();
+        });
+    </script>
+</body>
+</html>
