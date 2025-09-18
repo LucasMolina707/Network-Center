@@ -57,7 +57,7 @@
         </div>
     </footer>
 
- <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <script>
         // --- Configuración de Auth0 ---
         const config = {
@@ -69,86 +69,89 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // --- CORRECCIÓN APLICADA AQUÍ ---
-                // Se corrigió "_config" a "...config" para que la configuración se cargue correctamente.
+                // Se inicializa el cliente de Auth0
                 auth0Client = await auth0.createAuth0Client({
                     ...config,
                     cacheLocation: 'localstorage'
                 });
-                // --- FIN DE LA CORRECCIÓN ---
 
+                // Manejo de la redirección después de la autenticación
                 if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
                     await auth0Client.handleRedirectCallback();
                     window.history.replaceState({}, document.title, window.location.pathname);
                 }
 
+                // Verificación del estado de autenticación
                 const isAuthenticated = await auth0Client.isAuthenticated();
-
                 if (!isAuthenticated) {
+                    // Si no está autenticado, redirigir al login
                     await auth0Client.loginWithRedirect({
                         authorizationParams: { redirect_uri: window.location.href }
                     });
                 } else {
-                    // Si el usuario está autenticado, cargamos el menú y cualquier otra función de la página.
+                    // Si está autenticado, activar la funcionalidad de la página
                     loadPageFunctions();
                 }
             } catch (err) {
+                // Manejo de errores de autenticación
                 console.error("Error en la autenticación: ", err);
                 window.location.href = 'index.html';
             }
         });
         
-        // Esta función ahora carga el menú Y activa otras funcionalidades de la página.
+        // Esta función activa la lógica de la página, como el menú y los botones de copiar (si existieran en esta página).
         async function loadPageFunctions() {
-            // Cargar el menú de navegación
+            // Cargar el menú de navegación dinámico desde menu-links.json
             const navMenuPlaceholder = document.getElementById('nav-menu-placeholder');
             if (navMenuPlaceholder) {
-                const response = await fetch('/assets/data/menu-links.json');
-                const links = await response.json();
+                try {
+                    const response = await fetch('/assets/data/menu-links.json');
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    const links = await response.json();
 
-                links.forEach(link => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.textContent = link.texto;
-                    a.href = link.url;
-                    li.appendChild(a);
-                    navMenuPlaceholder.appendChild(li);
-                });
-
-                const logoutLi = document.createElement('li');
-                const logoutBtn = document.createElement('a');
-                logoutBtn.textContent = 'Cerrar Sesión';
-                logoutBtn.href = '#';
-                logoutBtn.style.fontWeight = 'bold';
-                logoutBtn.onclick = () => {
-                    auth0Client.logout({
-                        logoutParams: { returnTo: 'https://nc.inglucas.com.co/' }
+                    links.forEach(link => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.textContent = link.texto;
+                        a.href = link.url;
+                        li.appendChild(a);
+                        navMenuPlaceholder.appendChild(li);
                     });
-                };
-                logoutLi.appendChild(logoutBtn);
-                navMenuPlaceholder.appendChild(logoutLi);
+
+                    // Añadir el botón de Cerrar Sesión
+                    const logoutLi = document.createElement('li');
+                    const logoutBtn = document.createElement('a');
+                    logoutBtn.textContent = 'Cerrar Sesión';
+                    logoutBtn.href = '#';
+                    logoutBtn.style.fontWeight = 'bold';
+                    logoutBtn.onclick = () => {
+                        auth0Client.logout({
+                            logoutParams: { returnTo: 'https://nc.inglucas.com.co/' }
+                        });
+                    };
+                    logoutLi.appendChild(logoutBtn);
+                    navMenuPlaceholder.appendChild(logoutLi);
+                } catch (e) {
+                    console.error("Error al cargar el menú:", e);
+                }
             }
 
-            // Activar lógica del menú móvil
+            // Activar la lógica para el menú de hamburguesa
             const navToggle = document.querySelector('.nav-toggle');
             const mainNav = document.querySelector('.main-nav');
             if(navToggle && mainNav) {
-                navToggle.addEventListener('click', () => mainNav.classList.toggle('is-visible'));
-            }
-
-            // Activar lógica de botones de copiar (si existen en la página)
-            const copyButtons = document.querySelectorAll('.copy-btn');
-            copyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeBlock = button.previousElementSibling;
-                    const code = codeBlock.innerText;
-                    navigator.clipboard.writeText(code).then(() => {
-                        const originalIcon = button.innerHTML;
-                        button.innerHTML = '<i class="fas fa-check"></i> Copiado';
-                        setTimeout(() => { button.innerHTML = originalIcon; }, 2000);
-                    }).catch(err => { console.error('Error al copiar: ', err); });
+                navToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('is-visible');
+                    const icon = navToggle.querySelector('i');
+                    if (mainNav.classList.contains('is-visible')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
                 });
-            });
+            }
         }
     </script>
 
