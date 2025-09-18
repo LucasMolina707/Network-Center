@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Network Center S.A.S - Soporte Técnico e Internet en Villavicencio | Ing. Lucas Molina</title>
-
     <meta name="description" content="Network Center S.A.S, liderado por el Ing. Lucas Molina, ofrece servicios de mantenimiento de equipos, CCTV, y redes en Villavicencio. Expertos en soporte técnico 24/7.">
-
     <meta name="keywords" content="Network Center, Network Center S.A.S 2025, ingenieri Lucas Molina, ing Lucas, ing lucas molina, soporte técnico Villavicencio, mantenimiento de computadores">
 
     <link rel="stylesheet" href="style.css">
@@ -82,19 +80,31 @@
             try {
                 auth0Client = await auth0.createAuth0Client(config);
 
-                document.getElementById('login-button').addEventListener('click', async (e) => {
+                // Manejar la redirección de login
+                if (location.search.includes('code=') && location.search.includes('state=')) {
+                    await auth0Client.handleRedirectCallback();
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+
+                const loginButton = document.getElementById('login-button');
+                loginButton.addEventListener('click', async (e) => {
                     e.preventDefault();
-                    await auth0Client.loginWithRedirect({
-                        authorizationParams: {
-                            redirect_uri: 'https://nc.inglucas.com.co/portal.html'
-                        }
-                    });
+                    
+                    const isAuthenticated = await auth0Client.isAuthenticated();
+                    if (isAuthenticated) {
+                        window.location.href = 'https://nc.inglucas.com.co/portal.html';
+                    } else {
+                        await auth0Client.loginWithRedirect({
+                            authorizationParams: {
+                                redirect_uri: 'https://nc.inglucas.com.co/portal.html'
+                            }
+                        });
+                    }
                 });
             } catch (err) {
                 console.error("Error al inicializar Auth0: ", err);
             }
         });
     </script>
-
 </body>
 </html>
