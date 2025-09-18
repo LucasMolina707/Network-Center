@@ -93,7 +93,7 @@
             position: absolute;
             width: 80px;
             height: 80px;
-            background-image: url('https://i.ibb.co/683Q8gY/gato-corriendo.gif');
+            background-image: url('https://nc.inglucas.com.co/assets/images/gato-corriendo.gif');
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
@@ -147,7 +147,7 @@
             let mouseY = 0;
             let catX = window.innerWidth / 2;
             let catY = window.innerHeight / 2;
-            const velocity = 5; // Pixels per frame. This is the constant speed.
+            const velocity = 5;
             let catVelocityX = 0;
             let catVelocityY = 0;
 
@@ -170,18 +170,16 @@
                 const deltaY = mouseY - catY;
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-                if (distance > 50) { // Start moving if the cursor is at least 50px away
-                    // Normalize the vector to get a direction
+                if (distance > 50) { 
                     const dirX = deltaX / distance;
                     const dirY = deltaY / distance;
 
-                    // Set the velocity with a constant speed
                     catVelocityX = dirX * velocity;
                     catVelocityY = dirY * velocity;
                     
-                    if (deltaX < 0) { // Moving left
+                    if (deltaX < 0) { 
                         cat.style.transform = 'translate(-50%, -50%) scaleX(-1)';
-                    } else { // Moving right
+                    } else { 
                         cat.style.transform = 'translate(-50%, -50%) scaleX(1)';
                     }
                 } else {
@@ -189,18 +187,4 @@
                     catVelocityY = 0;
                 }
 
-                // Update the cat's position
                 catX += catVelocityX;
-                catY += catVelocityY;
-                
-                cat.style.left = `${catX}px`;
-                cat.style.top = `${catY}px`;
-                
-                requestAnimationFrame(animateCat);
-            }
-
-            animateCat();
-        });
-    </script>
-</body>
-</html>
