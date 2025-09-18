@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /* Estilos específicos para esta página */
         body {
             display: flex;
             flex-direction: column;
@@ -94,7 +93,7 @@
             position: absolute;
             width: 80px;
             height: 80px;
-            background-image: url('assets/images/gato-corriendo.gif');
+            background-image: url('https://i.ibb.co/683Q8gY/gato-corriendo.gif');
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
@@ -148,7 +147,9 @@
             let mouseY = 0;
             let catX = window.innerWidth / 2;
             let catY = window.innerHeight / 2;
-            const speed = 0.08;
+            const velocity = 5; // Pixels per frame. This is the constant speed.
+            let catVelocityX = 0;
+            let catVelocityY = 0;
 
             cat.style.opacity = '0';
             cat.style.transition = 'opacity 0.5s ease-in-out';
@@ -169,18 +170,31 @@
                 const deltaY = mouseY - catY;
                 const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-                if (distance > 20) {
-                    catX += deltaX * speed;
-                    catY += deltaY * speed;
-                    cat.style.left = `${catX}px`;
-                    cat.style.top = `${catY}px`;
+                if (distance > 50) { // Start moving if the cursor is at least 50px away
+                    // Normalize the vector to get a direction
+                    const dirX = deltaX / distance;
+                    const dirY = deltaY / distance;
+
+                    // Set the velocity with a constant speed
+                    catVelocityX = dirX * velocity;
+                    catVelocityY = dirY * velocity;
+                    
+                    if (deltaX < 0) { // Moving left
+                        cat.style.transform = 'translate(-50%, -50%) scaleX(-1)';
+                    } else { // Moving right
+                        cat.style.transform = 'translate(-50%, -50%) scaleX(1)';
+                    }
+                } else {
+                    catVelocityX = 0;
+                    catVelocityY = 0;
                 }
 
-                if (deltaX < 0) {
-                    cat.style.transform = 'translate(-50%, -50%) scaleX(-1)';
-                } else {
-                    cat.style.transform = 'translate(-50%, -50%) scaleX(1)';
-                }
+                // Update the cat's position
+                catX += catVelocityX;
+                catY += catVelocityY;
+                
+                cat.style.left = `${catX}px`;
+                cat.style.top = `${catY}px`;
                 
                 requestAnimationFrame(animateCat);
             }
