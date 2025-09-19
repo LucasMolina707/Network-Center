@@ -318,6 +318,7 @@ body.error-page {
     pointer-events: none;
     z-index: 1;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }
 
 @keyframes bounceIn {
@@ -454,3 +455,31 @@ body.error-page {
     padding: 2rem 0;
     text-align: center;
 }
+
+/* ========================================================= */
+/* ===== COMPONENTES DE GUÍA (CHECKLIST, CÓDIGO, NOTAS) ===== */
+/* ========================================================= */
+.checklist-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+    background-color: #f0f4f8;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    border-left: 5px solid var(--primary-color);
+}
+.task-checkbox { width: 1.3em; height: 1.3em; margin-right: 12px; cursor: pointer; }
+.task-checkbox:checked + label { text-decoration: line-through; color: #888; }
+.checklist-item label { font-size: 1.1rem; font-weight: 700; color: var(--heading-color); cursor: pointer; flex-grow: 1; }
+
+.code-block { background-color: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: var(--border-radius); margin: 1rem 0; position: relative; font-family: 'Courier New', Courier, monospace; }
+.code-block pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; }
+.code-block .copy-btn { position: absolute; top: 10px; right: 10px; background-color: #4a5568; color: var(--white-color); border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; transition: background-color .2s; }
+.code-block .copy-btn:hover { background-color: #2c3440; }
+
+.note { background-color: #fff8e1; border-left: 5px solid var(--warning-color); padding: 1rem; margin: 1.5rem 0; border-radius: var(--border-radius); }
+
+.part-divider { border: 0; height: 2px; background-image: linear-gradient(to right, transparent, var(--dark-color), transparent); margin: 3rem 0; }
+
+/* Limpieza de script.js obsoleto */
+/* El archivo script.js ya no es necesario, su lógica está en assets/js/main.js */
